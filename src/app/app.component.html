@@ -1,0 +1,162 @@
+<div class="container-fluid p-1 ">
+<span>
+  <img src="../assets/fitness_icon.png" style="float: left; margin-left: 30px; width: 60px;height: auto;opacity: 0.8;">
+  <h4
+  style="
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Dosis', sans-serif;
+    position: relative;
+  "
+>
+  Fitness Tracker
+</h4></span>
+  
+</div>
+
+<div class="container-fluid" style="background-color: purple;">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background: purple;">
+    <a class="navbar-brand" href="#"
+      >
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a
+          class="nav-link p-2"
+          href="#"
+          style="
+            color: white;
+            font-size: 18px;
+            font-family: 'Dosis', sans-serif;
+            margin-left: 20px;
+          "
+          routerLink="/landing-page"
+          >Home <span class="sr-only"></span
+        ></a>
+        <a
+          class="nav-link p-2"
+          href="#"
+          style="
+            color: white;
+            font-size: 18px;
+            font-family: 'Dosis', sans-serif;
+            margin-left: 20px;
+          "
+          routerLink="place-fitness-trainer-appointment"
+          >Place Appointment</a
+        >
+        <a
+          class="nav-link p-2"
+          href="#"
+          style="
+            color: white;
+            font-size: 18px;
+            font-family: 'Dosis', sans-serif;
+            margin-left: 20px;
+          "
+          routerLink="view-appointment"
+          >View Appointment</a
+        >
+        <a
+          class="nav-link p-2"
+          href="#"
+          style="
+            color: white;
+            font-size: 18px;
+            font-family: 'Dosis', sans-serif;
+            margin-left: 20px;
+          "
+          routerLink="contact-us"
+          >Contact-Us</a
+        >
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="row" style="height: 800px;">
+  <div class="col-md-2 d-none d-md-block" style="background: black;">
+    <nav class="navbar text-white" style="font-family: 'Dosis', sans-serif;">
+      <!-- Links -->
+      <ul class="navbar-nav" style="background: black; margin-top: 50px;">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/landing-page"
+            style="
+              color: white;
+              font-size: 18px;
+              font-family: 'Dosis', sans-serif;
+              margin-left: 20px;
+            "
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="place-fitness-trainer-appointment"
+            style="
+              color: white;
+              font-size: 18px;
+              font-family: 'Dosis', sans-serif;
+              margin-left: 20px;
+            "
+            >Place Appointment</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="view-appointment"
+            style="
+              color: white;
+              font-size: 18px;
+              font-family: 'Dosis', sans-serif;
+              margin-left: 20px;
+            "
+            >View Appointment</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="contact-us"
+            style="
+              color: white;
+              font-size: 18px;
+              font-family: 'Dosis', sans-serif;
+              margin-left: 20px;
+            "
+            >Contact-Us</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-10 col-sm-12">
+    <div class="container" style="margin-top: 50px;">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="sidebar">
+  <button (click)="landingpage()">Home</button><br />
+  <button (click)="placeAppointment()">Place Appointment</button><br />
+  <button (click)="viewAppointment()">View Appointment</button><br />
+  <button (click)="contactUspage()">Contact Us</button>
+</div>
+-->

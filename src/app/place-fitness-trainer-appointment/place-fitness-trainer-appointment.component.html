@@ -1,0 +1,469 @@
+<!-- ____________________________________________________ -->
+
+<div class="container" style="border: 1px solid black; border-radius: 3px;">
+  <div
+    *ngIf="!updateFlag"
+    style="
+      color: black;
+      font-size: 24px;
+      font-weight: bold;
+      font-family: 'Dosis', sans-serif;
+    "
+  >
+    Place Fiteness Trainer Appointment
+  </div>
+  <div
+    *ngIf="updateFlag"
+    style="
+      color: black;
+      font-size: 24px;
+      font-weight: bold;
+      font-family: 'Dosis', sans-serif;
+    "
+  >
+    Update Fiteness Trainer Appointment
+  </div>
+  <br />
+
+  <form [formGroup]="fitnessForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- <label>Place Appointment</label> -->
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="exampleInputfirstname">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          [class.is-invalid]="
+            fitnessForm.controls.firstname.invalid &&
+            fitnessForm.controls.firstname.touched
+          "
+          pattern="[A-Za-z ]*"
+          formControlName="firstname"
+          placeholder="First Name"
+        />
+        <small
+          class="form-text text-danger"
+          *ngIf="
+            (fitnessForm.controls.firstname.invalid &&
+              fitnessForm.controls.firstname.touched) ||
+            (fitnessForm.controls.firstname.touched &&
+              fitnessForm.controls.firstname.errors?.required)
+          "
+        >
+          Please enter valid first name.!
+        </small>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="exampleInputlastname">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="lastname"
+          [class.is-invalid]="
+            fitnessForm.controls.lastname.invalid &&
+            fitnessForm.controls.lastname.touched
+          "
+          pattern="[A-Za-z ]*"
+          placeholder="Last Name"
+        />
+        <small
+          class="form-text text-danger"
+          *ngIf="
+            (fitnessForm.controls.lastname.invalid &&
+              fitnessForm.controls.lastname.touched) ||
+            (fitnessForm.controls.lastname.touched &&
+              fitnessForm.controls.lastname.errors?.required)
+          "
+        >
+          Please enter last name.!
+        </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="exampleInputage">Age</label>
+        <input
+          type="number"
+          (blur)="validateAge(fitnessForm.controls.age.value)"
+          (change)="validateAge(fitnessForm.controls.age.value)"
+          class="form-control"
+          formControlName="age"
+          [class.is-invalid]="
+            !ageFlag ||
+            (fitnessForm.controls.age.invalid &&
+              fitnessForm.controls.age.touched)
+          "
+          pattern="^\d{2}$"
+          placeholder="Age"
+        />
+        <small
+          class="form-text text-danger"
+          *ngIf="
+            !ageFlag ||
+            (fitnessForm.controls.age.invalid &&
+              fitnessForm.controls.age.touched) ||
+            (fitnessForm.controls.age.touched &&
+              fitnessForm.controls.age.errors?.required)
+          "
+        >
+          Please enter valid age(18-60).!
+        </small>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="exampleInputphonenumber">Phone Number</label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="phonenumber"
+          [class.is-invalid]="
+            fitnessForm.controls.phonenumber.invalid &&
+            fitnessForm.controls.phonenumber.touched
+          "
+          pattern="^\d{10}$"
+          placeholder="Phone Number"
+        />
+        <small
+          class="form-text text-danger"
+          *ngIf="
+            (fitnessForm.controls.phonenumber.invalid &&
+              fitnessForm.controls.phonenumber.touched) ||
+            (fitnessForm.controls.phonenumber.touched &&
+              fitnessForm.controls.phonenumber.errors?.required)
+          "
+        >
+          Please enter phone number.!
+        </small>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="exampleInputemail">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+          [class.is-invalid]="
+            fitnessForm.controls.email.invalid &&
+            fitnessForm.controls.email.touched
+          "
+          pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          placeholder="Email"
+        />
+        <small
+          class="form-text text-danger"
+          *ngIf="
+            fitnessForm.controls.email.touched &&
+            fitnessForm.controls.email.errors?.required
+          "
+        >
+          Please enter email.!
+        </small>
+        <small
+          class="form-text text-danger"
+          *ngIf="
+            (fitnessForm.controls.email.invalid &&
+              fitnessForm.controls.email.touched) ||
+            (fitnessForm.controls.email.touched &&
+              fitnessForm.controls.email.errors?.email)
+          "
+        >
+          Enter the valid email .!
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-2 pt-0">Address</legend>
+          <div class="col-sm-10">
+            <div class="form-group col-md-12">
+              <label for="exampleInputstreetaddress">Street Address</label>
+              <input
+                type="text"
+                class="form-control"
+                [class.is-invalid]="
+                  fitnessForm.controls.streetaddress.invalid &&
+                  fitnessForm.controls.streetaddress.touched
+                "
+                pattern="[0-9A-Za-z# ]*"
+                formControlName="streetaddress"
+                placeholder="Street Address"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="
+                  (fitnessForm.controls.streetaddress.invalid &&
+                    fitnessForm.controls.streetaddress.touched) ||
+                  (fitnessForm.controls.streetaddress.touched &&
+                    fitnessForm.controls.streetaddress.errors?.required)
+                "
+              >
+                Please enter Street Address.!
+              </small>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="exampleInputcity">City</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="city"
+                [class.is-invalid]="
+                  fitnessForm.controls.city.invalid &&
+                  fitnessForm.controls.city.touched
+                "
+                pattern="[A-Za-z ]*"
+                placeholder="City"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="
+                  (fitnessForm.controls.city.invalid &&
+                    fitnessForm.controls.city.touched) ||
+                  (fitnessForm.controls.city.touched &&
+                    fitnessForm.controls.city.errors?.required)
+                "
+              >
+                Please enter city.!
+              </small>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="exampleInputstate">State</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="state"
+                [class.is-invalid]="
+                  fitnessForm.controls.state.invalid &&
+                  fitnessForm.controls.state.touched
+                "
+                pattern="[A-Za-z ]*"
+                placeholder="State"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="
+                  (fitnessForm.controls.state.invalid &&
+                    fitnessForm.controls.state.touched) ||
+                  (fitnessForm.controls.state.touched &&
+                    fitnessForm.controls.state.errors?.required)
+                "
+              >
+                Please enter State.!
+              </small>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="exampleInputcountry">Country</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="country"
+                [class.is-invalid]="
+                  fitnessForm.controls.country.invalid &&
+                  fitnessForm.controls.country.touched
+                "
+                pattern="[A-Za-z ]*"
+                placeholder="Country"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="
+                  (fitnessForm.controls.country.invalid &&
+                    fitnessForm.controls.country.touched) ||
+                  (fitnessForm.controls.country.touched &&
+                    fitnessForm.controls.country.errors?.required)
+                "
+              >
+                Please enter country.!
+              </small>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="exampleInputpincode">Pincode</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="pincode"
+                [class.is-invalid]="
+                  fitnessForm.controls.pincode.invalid &&
+                  fitnessForm.controls.pincode.touched
+                "
+                pattern="^\d{6}$"
+                placeholder="Pincode"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="
+                  (fitnessForm.controls.pincode.invalid &&
+                    fitnessForm.controls.pincode.touched) ||
+                  (fitnessForm.controls.pincode.touched &&
+                    fitnessForm.controls.pincode.errors?.required)
+                "
+              >
+                Please enter valid pincode.!
+              </small>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="form-group form-row">
+      <div class="form-group form-row col-md-4">
+        <!-- package -->
+        <label for="inputpackage">Package</label>
+        <select
+          (blur)="validatePackage(fitnessForm.controls.packages.value)"
+          (change)="validatePackage(fitnessForm.controls.packages.value)"
+          required
+          formControlName="packages"
+          [class.is-invalid]="
+            packageSelectFlag && fitnessForm.controls.packages.touched
+          "
+          id="packages"
+          class="form-control custom-select"
+        >
+          <option value="">Select a package</option>
+          <option>500</option>
+          <option>100</option>
+          <option>50</option>
+        </select>
+        <small
+          class="text-danger"
+          [class.d-none]="
+            !packageSelectFlag || fitnessForm.controls.packages.untouched
+          "
+          >Please select a package.</small
+        >
+        <div class="form-group col-md-6">
+          <label for="exampleInputInr">Inr</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="inr"
+            [class.is-invalid]="
+              fitnessForm.controls.inr.invalid &&
+              fitnessForm.controls.inr.touched
+            "
+            placeholder="Inr"
+          />
+          <small
+            class="form-text text-danger"
+            *ngIf="
+              (fitnessForm.controls.pincode.invalid &&
+                fitnessForm.controls.pincode.touched) ||
+              (fitnessForm.controls.inr.touched &&
+                fitnessForm.controls.inr.errors?.required)
+            "
+          >
+            Please enter valid Inr.!
+          </small>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="exampleInputpaisa">Paisa</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="paisa"
+            [class.is-invalid]="
+              fitnessForm.controls.paisa.invalid &&
+              fitnessForm.controls.paisa.touched
+            "
+            placeholder="Paisa"
+          />
+          <small
+            class="form-text text-danger"
+            *ngIf="
+              (fitnessForm.controls.pincode.invalid &&
+                fitnessForm.controls.pincode.touched) ||
+              (fitnessForm.controls.paisa.touched &&
+                fitnessForm.controls.paisa.errors?.required)
+            "
+          >
+            Please enter valid paisa.!
+          </small>
+        </div>
+        <!-- Package end -->
+      </div>
+
+      <div class="form-group col-md-4">
+        <!-- package -->
+        <label for="inputtrainerpreference">Trainer Preference</label>
+        <select
+          (blur)="validateTrainer(fitnessForm.controls.trainerpreference.value)"
+          (change)="
+            validateTrainer(fitnessForm.controls.trainerpreference.value)
+          "
+          required
+          formControlName="trainerpreference"
+          [class.is-invalid]="
+            trainerSelectFlag && fitnessForm.controls.trainerpreference.touched
+          "
+          id="packages"
+          class="form-control custom-select"
+        >
+          <option value="">Trainer Pref</option>
+          <option>male</option>
+          <option>female</option>
+        </select>
+        <small
+          class="text-danger"
+          [class.d-none]="
+            !trainerSelectFlag ||
+            fitnessForm.controls.trainerpreference.untouched
+          "
+          >Please select a package.</small
+        >
+        <!-- Package end -->
+      </div>
+
+      <div class="form-group col-md-4">
+        <!-- package -->
+        <label for="inputphysiotherapist">Physiotherapist</label>
+        <select
+          (blur)="
+            validatePhysiotherapist(fitnessForm.controls.physiotherapist.value)
+          "
+          (change)="
+            validatePhysiotherapist(fitnessForm.controls.physiotherapist.value)
+          "
+          required
+          formControlName="physiotherapist"
+          [class.is-invalid]="
+            physiotherapistSelectFlag &&
+            fitnessForm.controls.physiotherapist.touched
+          "
+          id="packages"
+          class="form-control custom-select"
+        >
+          <option value="">Physiotherapist</option>
+          <option>yes</option>
+          <option>No</option>
+        </select>
+        <small
+          class="text-danger"
+          [class.d-none]="
+            !physiotherapistSelectFlag ||
+            fitnessForm.controls.physiotherapist.untouched
+          "
+          >Please select a package.</small
+        >
+        <!-- Package end -->
+      </div>
+    </div>
+
+    <button
+      class="btn btn-primary btn-lg btn-block"
+      type="submit"
+      [disabled]="fitnessForm.invalid"
+    >
+      <div [class.d-none]="updateFlag">Submit</div>
+      <div [class.d-none]="!updateFlag">Update</div>
+    </button>
+  </form>
+</div>

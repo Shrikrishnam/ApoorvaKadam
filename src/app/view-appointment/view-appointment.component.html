@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="table-responsive-sm p-3" style="width: 100%;">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="h1">Sl NO</th>
+          <th scope="col" class="h2">Name</th>
+          <th scope="col" class="h3">Address</th>
+          <th scope="col" class="h4">City</th>
+          <th scope="col" class="h5">Package</th>
+          <th scope="col" class="h6">Trainer Preference</th>
+          <th scope="col" class="h7">Phone</th>
+          <td><h6>Edit</h6></td>
+          <td><h6>Delete</h6></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let friend of this.allfriends">
+          <th scope="row">{{ friend.id }}</th>
+          <td>{{ friend.firstname }} {{ friend.lastname }}</td>
+          <td>
+            {{ friend.streetaddress }}, {{ friend.state }},
+            {{ friend.country }}
+          </td>
+          <td>{{ friend.city }}</td>
+          <td>{{ friend.packages }}</td>
+          <td>
+            {{ friend.physiotherapist }}( {{ friend.trainerpreference }} )
+          </td>
+          <td>{{ friend.phonenumber }}</td>
+          <td>
+            <i
+              class="fa fa-pencil"
+              aria-hidden="true"
+              style="font-size: large; cursor: pointer;"
+              (click)="editData(friend)"
+            ></i>
+          </td>
+          <td>
+            <i
+              class="fa fa-trash"
+              aria-hidden="true"
+              style="font-size: large; color: darkred; cursor: pointer;"
+              (click)="deleteData(friend.id)"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  >
+</div>
